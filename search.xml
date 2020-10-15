@@ -4,11 +4,36 @@
   
     
     <entry>
-      <title>ClusDet</title>
-      <link href="2019/10/27/ClusDet/"/>
-      <url>2019/10/27/ClusDet/</url>
+      <title>Hexo 安装</title>
+      <link href="2020/10/16/Hexo/"/>
+      <url>2020/10/16/Hexo/</url>
       
-        <content type="html"><![CDATA[<ul><li>论文：《<a href="http://openaccess.thecvf.com/content_ICCV_2019/papers/Yang_Clustered_Object_Detection_in_Aerial_Images_ICCV_2019_paper.pdf">Clustered Object Detection in Aerial Images</a>》</li></ul><hr><ul><li><p>问题</p><ul><li><p>输入分辨率高</p></li><li><p>目标小</p></li><li><p>目标稀疏且非均匀分布</p></li></ul></li></ul><hr><ul><li><p>方案</p><ul><li>检测目标聚集区域，并从该区域内检测，将结果与全局检测结合</li></ul></li></ul><hr>]]></content>
+        <content type="html"><![CDATA[<ul><li>基础功能：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org</span><br><span class="line">npm install hexo-cli -g</span><br><span class="line">npm install hexo-server --save</span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></li></ul><hr><ul><li>主题：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;tufu9441&#x2F;maupassant-hexo.git themes&#x2F;maupassant</span><br><span class="line">npm install hexo-renderer-pug --save</span><br><span class="line">npm install hexo-renderer-sass --save</span><br></pre></td></tr></table></figure></li></ul><hr><ul><li>页面显示：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-archive --save</span><br><span class="line">npm install hexo-generator-category --save</span><br><span class="line">npm install hexo-generator-tag --save</span><br><span class="line">npm install hexo-generator-search --save</span><br><span class="line">npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure></li></ul><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Tool </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CARAFE</title>
+      <link href="2019/10/27/CARAFE/"/>
+      <url>2019/10/27/CARAFE/</url>
+      
+        <content type="html"><![CDATA[<ul><li>论文：《<a href="http://openaccess.thecvf.com/content_ICCV_2019/papers/Wang_CARAFE_Content-Aware_ReAssembly_of_FEatures_ICCV_2019_paper.pdf">CARAFE: Content-Aware ReAssembly of FEatures</a>》</li></ul><hr><ul><li><p>目的</p><ul><li>解决检测、分割等任务中的上采样问题</li></ul></li></ul><hr><ul><li><p>特性</p><ul><li>大感受野</li><li>内容感知</li><li>轻量级</li></ul></li></ul><hr><ul><li><p>方案</p><p><img src="CARAFE.png"></p></li></ul><hr><ul><li><p>代码</p><ul><li><a href="https://github.com/open-mmlab/mmdetection">https://github.com/open-mmlab/mmdetection</a></li></ul></li></ul><hr>]]></content>
       
       
       <categories>
@@ -24,7 +49,9 @@
             
             <tag> Object Detection </tag>
             
-            <tag> aerial </tag>
+            <tag> light-weight </tag>
+            
+            <tag> upsample </tag>
             
         </tags>
       
@@ -52,6 +79,35 @@
             <tag> ICCV </tag>
             
             <tag> Object Detection </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>ClusDet</title>
+      <link href="2019/10/27/ClusDet/"/>
+      <url>2019/10/27/ClusDet/</url>
+      
+        <content type="html"><![CDATA[<ul><li>论文：《<a href="http://openaccess.thecvf.com/content_ICCV_2019/papers/Yang_Clustered_Object_Detection_in_Aerial_Images_ICCV_2019_paper.pdf">Clustered Object Detection in Aerial Images</a>》</li></ul><hr><ul><li><p>问题</p><ul><li><p>输入分辨率高</p></li><li><p>目标小</p></li><li><p>目标稀疏且非均匀分布</p></li></ul></li></ul><hr><ul><li><p>方案</p><ul><li>检测目标聚集区域，并从该区域内检测，将结果与全局检测结合</li></ul></li></ul><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Paper </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ICCV </tag>
+            
+            <tag> Object Detection </tag>
+            
+            <tag> aerial </tag>
             
         </tags>
       
@@ -110,37 +166,6 @@
             <tag> Visual Cognition </tag>
             
             <tag> relationship </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>CARAFE</title>
-      <link href="2019/10/27/CARAFE/"/>
-      <url>2019/10/27/CARAFE/</url>
-      
-        <content type="html"><![CDATA[<ul><li>论文：《<a href="http://openaccess.thecvf.com/content_ICCV_2019/papers/Wang_CARAFE_Content-Aware_ReAssembly_of_FEatures_ICCV_2019_paper.pdf">CARAFE: Content-Aware ReAssembly of FEatures</a>》</li></ul><hr><ul><li><p>目的</p><ul><li>解决检测、分割等任务中的上采样问题</li></ul></li></ul><hr><ul><li><p>特性</p><ul><li>大感受野</li><li>内容感知</li><li>轻量级</li></ul></li></ul><hr><ul><li><p>方案</p><p><img src="CARAFE.png"></p></li></ul><hr><ul><li><p>代码</p><ul><li><a href="https://github.com/open-mmlab/mmdetection">https://github.com/open-mmlab/mmdetection</a></li></ul></li></ul><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> Paper </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> ICCV </tag>
-            
-            <tag> Object Detection </tag>
-            
-            <tag> light-weight </tag>
-            
-            <tag> upsample </tag>
             
         </tags>
       
