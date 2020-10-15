@@ -4,35 +4,6 @@
   
     
     <entry>
-      <title>CARAFE</title>
-      <link href="2019/10/27/CARAFE/"/>
-      <url>2019/10/27/CARAFE/</url>
-      
-        <content type="html"><![CDATA[<ul><li>论文：《<a href="http://openaccess.thecvf.com/content_ICCV_2019/papers/Wang_CARAFE_Content-Aware_ReAssembly_of_FEatures_ICCV_2019_paper.pdf">CARAFE: Content-Aware ReAssembly of FEatures</a>》</li></ul><hr><ul><li><p>目的</p><ul><li>解决检测、分割等任务中的上采样问题</li></ul></li></ul><hr><ul><li><p>特性</p><ul><li>大感受野</li><li>内容感知</li><li>轻量级</li></ul></li></ul><hr><ul><li><p>方案</p><p><img src="CARAFE.png"></p></li></ul><hr><ul><li><p>代码</p><ul><li><a href="https://github.com/open-mmlab/mmdetection">https://github.com/open-mmlab/mmdetection</a></li></ul></li></ul><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> Object Detection </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> ICCV </tag>
-            
-            <tag> upsample </tag>
-            
-            <tag> light-weight </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>ClusDet</title>
       <link href="2019/10/27/ClusDet/"/>
       <url>2019/10/27/ClusDet/</url>
@@ -42,7 +13,7 @@
       
       <categories>
           
-          <category> Object Detection </category>
+          <category> Paper </category>
           
       </categories>
       
@@ -50,6 +21,8 @@
         <tags>
             
             <tag> ICCV </tag>
+            
+            <tag> Object Detection </tag>
             
             <tag> aerial </tag>
             
@@ -69,7 +42,7 @@
       
       <categories>
           
-          <category> Object Detection </category>
+          <category> Paper </category>
           
       </categories>
       
@@ -77,6 +50,8 @@
         <tags>
             
             <tag> ICCV </tag>
+            
+            <tag> Object Detection </tag>
             
         </tags>
       
@@ -94,7 +69,7 @@
       
       <categories>
           
-          <category> Object Detection </category>
+          <category> Paper </category>
           
       </categories>
       
@@ -102,6 +77,8 @@
         <tags>
             
             <tag> ICCV </tag>
+            
+            <tag> Object Detection </tag>
             
             <tag> scratch </tag>
             
@@ -121,7 +98,7 @@
       
       <categories>
           
-          <category> Visual Cognition </category>
+          <category> Paper </category>
           
       </categories>
       
@@ -130,7 +107,40 @@
             
             <tag> ICCV </tag>
             
+            <tag> Visual Cognition </tag>
+            
             <tag> relationship </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CARAFE</title>
+      <link href="2019/10/27/CARAFE/"/>
+      <url>2019/10/27/CARAFE/</url>
+      
+        <content type="html"><![CDATA[<ul><li>论文：《<a href="http://openaccess.thecvf.com/content_ICCV_2019/papers/Wang_CARAFE_Content-Aware_ReAssembly_of_FEatures_ICCV_2019_paper.pdf">CARAFE: Content-Aware ReAssembly of FEatures</a>》</li></ul><hr><ul><li><p>目的</p><ul><li>解决检测、分割等任务中的上采样问题</li></ul></li></ul><hr><ul><li><p>特性</p><ul><li>大感受野</li><li>内容感知</li><li>轻量级</li></ul></li></ul><hr><ul><li><p>方案</p><p><img src="CARAFE.png"></p></li></ul><hr><ul><li><p>代码</p><ul><li><a href="https://github.com/open-mmlab/mmdetection">https://github.com/open-mmlab/mmdetection</a></li></ul></li></ul><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Paper </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ICCV </tag>
+            
+            <tag> Object Detection </tag>
+            
+            <tag> light-weight </tag>
+            
+            <tag> upsample </tag>
             
         </tags>
       
@@ -148,7 +158,7 @@
       
       <categories>
           
-          <category> Object Detection </category>
+          <category> Paper </category>
           
       </categories>
       
@@ -156,6 +166,8 @@
         <tags>
             
             <tag> ICCV </tag>
+            
+            <tag> Object Detection </tag>
             
             <tag> light-weight </tag>
             
@@ -181,7 +193,7 @@
       
       <categories>
           
-          <category> Object Detection </category>
+          <category> Paper </category>
           
       </categories>
       
@@ -189,6 +201,8 @@
         <tags>
             
             <tag> ICCV </tag>
+            
+            <tag> Object Detection </tag>
             
             <tag> scale </tag>
             
@@ -208,7 +222,7 @@
       
       <categories>
           
-          <category> Visual Cognition </category>
+          <category> Paper </category>
           
       </categories>
       
@@ -217,86 +231,11 @@
             
             <tag> ICCV </tag>
             
+            <tag> Visual Cognition </tag>
+            
             <tag> relationship </tag>
             
             <tag> dataset </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>BCNet</title>
-      <link href="2019/09/09/CBNet/"/>
-      <url>2019/09/09/CBNet/</url>
-      
-        <content type="html"><![CDATA[<ul><li>论文：《<a href="https://arxiv.org/pdf/1909.03625.pdf">CBNet: A Novel Composite Backbone Network Architecture for Object Detection</a>》</li></ul><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> Object Detection </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>HetConv</title>
-      <link href="2019/06/16/HetConv/"/>
-      <url>2019/06/16/HetConv/</url>
-      
-        <content type="html"><![CDATA[<ul><li>论文：《<a href="http://openaccess.thecvf.com/content_CVPR_2019/html/Singh_HetConv_Heterogeneous_Kernel-Based_Convolutions_for_Deep_CNNs_CVPR_2019_paper.html">HetConv: Heterogeneous Kernel-Based Convolutions for Deep CNNs</a>》</li></ul><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> Network </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> CVPR </tag>
-            
-            <tag> efficiency </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Libra R-CNN</title>
-      <link href="2019/06/16/Libra%20R-CNN/"/>
-      <url>2019/06/16/Libra%20R-CNN/</url>
-      
-        <content type="html"><![CDATA[<ul><li>论文：《<a href="http://openaccess.thecvf.com/content_CVPR_2019/papers/Pang_Libra_R-CNN_Towards_Balanced_Learning_for_Object_Detection_CVPR_2019_paper.pdf">Libra R-CNN: Towards Balanced Learning for Object Detection</a>》</li></ul><hr><ul><li>问题<ul><li>1</li></ul></li></ul><hr><ul><li>方案<ul><li>1</li></ul></li></ul><hr><p>为什么特征融合后要分别做卷积并加回原feature map?</p><p>《<a href="http://openaccess.thecvf.com/content_ICCV_2019/papers/Li_Scale-Aware_Trident_Networks_for_Object_Detection_ICCV_2019_paper.pdf">Scale-Aware Trident Networks for Object Detection</a>》表示特定的感受野对特定尺度的目标预测效果最佳，直接融合所有尺度的特征不一定有助于所有目标的检测。</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Object Detection </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> fusion </tag>
-            
-            <tag> CVPR </tag>
-            
-            <tag> loss </tag>
-            
-            <tag> sampling </tag>
             
         </tags>
       
@@ -314,7 +253,7 @@
       
       <categories>
           
-          <category> Object Detection </category>
+          <category> Paper </category>
           
       </categories>
       
@@ -324,6 +263,8 @@
             <tag> fusion </tag>
             
             <tag> NeurIPS </tag>
+            
+            <tag> Object Detection </tag>
             
             <tag> backbone </tag>
             
@@ -343,7 +284,7 @@
       
       <categories>
           
-          <category> Visual Cognition </category>
+          <category> Paper </category>
           
       </categories>
       
@@ -352,13 +293,15 @@
             
             <tag> ECCV </tag>
             
+            <tag> loss </tag>
+            
             <tag> classification </tag>
             
             <tag> attribute </tag>
             
             <tag> attention </tag>
             
-            <tag> loss </tag>
+            <tag> Visual Cognition </tag>
             
         </tags>
       
@@ -376,7 +319,7 @@
       
       <categories>
           
-          <category> Object Detection </category>
+          <category> Paper </category>
           
       </categories>
       
@@ -384,6 +327,8 @@
         <tags>
             
             <tag> ECCV </tag>
+            
+            <tag> Object Detection </tag>
             
             <tag> backbone </tag>
             
@@ -394,23 +339,27 @@
     
     
     <entry>
-      <title>CFENet</title>
-      <link href="2018/07/26/CFENet/"/>
-      <url>2018/07/26/CFENet/</url>
+      <title>SparseNet</title>
+      <link href="2018/09/08/SparseNet/"/>
+      <url>2018/09/08/SparseNet/</url>
       
-        <content type="html"><![CDATA[<ul><li>论文：《<a href="https://arxiv.org/pdf/1806.09790.pdf">CFENet: An Accurate and Efficient Single-Shot Object Detector for Autonomous Driving</a>》</li></ul>]]></content>
+        <content type="html"><![CDATA[<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><ul><li>论文：《<a href="https://openaccess.thecvf.com/content_ECCV_2018/papers/Ligeng_Zhu_Sparsely_Aggregated_Convolutional_ECCV_2018_paper.pdf">Sparsely Aggregated Convolutional Networks</a>》</li></ul><hr><ul><li>问题：<ul><li>ResNet型密集聚合（+）：聚合后的特征不可分解，深层特征稀释或破坏浅层特征</li><li>DenseNet型密集聚合（concat）：参数以\(O(N^2)\)增加，消耗大量参数和运算来处理同一块特征</li></ul></li></ul><hr><ul><li>方案：<ul><li>保留短梯度路径（skip connection）的优势，但避免类ResNet、DenseNet的稠密聚合</li><li>\(y_l=F_l(\bigotimes(y_{l-c^0},y_{l-c^1},y_{l-c^2}…y_{l-c^k}))\)</li></ul></li></ul><hr><p><img src="SparseNet.png"></p><hr><ul><li>相关：<ul><li><a href="">PRN</a></li><li><a href="">CSPNet</a></li></ul></li></ul><hr>]]></content>
       
       
       <categories>
           
-          <category> Object Detection </category>
+          <category> Paper </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> fusion </tag>
+            <tag> ECCV </tag>
+            
+            <tag> light-weight </tag>
+            
+            <tag> backbone </tag>
             
         </tags>
       
@@ -428,7 +377,7 @@
       
       <categories>
           
-          <category> Object Detection </category>
+          <category> Paper </category>
           
       </categories>
       
@@ -437,55 +386,11 @@
             
             <tag> CVPR </tag>
             
+            <tag> Object Detection </tag>
+            
+            <tag> two-stage </tag>
+            
             <tag> cascade </tag>
-            
-            <tag> two-stage </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Light-Head R-CNN</title>
-      <link href="2017/11/20/Light-Head%20R-CNN/"/>
-      <url>2017/11/20/Light-Head%20R-CNN/</url>
-      
-        <content type="html"><![CDATA[<ul><li>论文：《<a href="https://arxiv.org/pdf/1711.07264.pdf">Light-Head R-CNN: In Defense of Two-Stage Object Detector</a>》</li></ul><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> Object Detection </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> light-weight </tag>
-            
-            <tag> two-stage </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>DCNNs</title>
-      <link href="2016/12/05/DCNNs/"/>
-      <url>2016/12/05/DCNNs/</url>
-      
-        <content type="html"><![CDATA[<ul><li>论文：《<a href="https://papers.nips.cc/paper/6212-diffusion-convolutional-neural-networks.pdf">Diffusion-convolutional neural networks</a>》</li></ul>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> NeurIPS </tag>
             
         </tags>
       
@@ -503,7 +408,7 @@
       
       <categories>
           
-          <category> Object Detection </category>
+          <category> Paper </category>
           
       </categories>
       
@@ -512,24 +417,7 @@
             
             <tag> ECCV </tag>
             
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Convolutional networks on graphs for learning molecular fingerprints</title>
-      <link href="2015/12/07/Convolutional%20networks%20on%20graphs%20for%20learning%20molecular%20fingerprints/"/>
-      <url>2015/12/07/Convolutional%20networks%20on%20graphs%20for%20learning%20molecular%20fingerprints/</url>
-      
-        <content type="html"><![CDATA[<ul><li>论文：《<a href="https://papers.nips.cc/paper/5954-convolutional-networks-on-graphs-for-learning-molecular-fingerprints.pdf">Convolutional networks on graphs for learning molecular fingerprints</a>》</li></ul>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> NeurIPS </tag>
+            <tag> Object Detection </tag>
             
         </tags>
       
