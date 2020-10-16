@@ -29,6 +29,35 @@
     
     
     <entry>
+      <title>CSPNet</title>
+      <link href="2020/06/16/CSPNet/"/>
+      <url>2020/06/16/CSPNet/</url>
+      
+        <content type="html"><![CDATA[<ul><li>论文：《<a href="https://openaccess.thecvf.com/content_CVPRW_2020/papers/w28/Wang_CSPNet_A_New_Backbone_That_Can_Enhance_Learning_Capability_of_CVPRW_2020_paper.pdf">CSPNet: A New Backbone that can Enhance Learning Capability of CNN</a>》</li></ul><hr><p>问题：</p><hr><p>方案：</p><hr><hr><ul><li>相关：<ul><li><a href="http://qi-yao.xyz/2018/09/08/SparseNet/">SparseNet</a></li><li><a href="http://qi-yao.xyz/2019/10/27/PartialResidualNetworks/">PRN</a></li></ul></li></ul><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Paper </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> light-weight </tag>
+            
+            <tag> CVPR </tag>
+            
+            <tag> backbone </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CARAFE</title>
       <link href="2019/10/27/CARAFE/"/>
       <url>2019/10/27/CARAFE/</url>
@@ -399,7 +428,7 @@
       <link href="2018/09/08/SparseNet/"/>
       <url>2018/09/08/SparseNet/</url>
       
-        <content type="html"><![CDATA[<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><ul><li>论文：《<a href="https://openaccess.thecvf.com/content_ECCV_2018/papers/Ligeng_Zhu_Sparsely_Aggregated_Convolutional_ECCV_2018_paper.pdf">Sparsely Aggregated Convolutional Networks</a>》</li></ul><hr><ul><li>问题：<ul><li>ResNet型密集聚合（+）：聚合后的特征不可分解，深层特征稀释或破坏浅层特征</li><li>DenseNet型密集聚合（concat）：参数以\(O(N^2)\)增加，消耗大量参数和运算来处理同一块特征</li></ul></li></ul><hr><ul><li>方案：<ul><li>保留短梯度路径（skip connection）的优势，但避免类ResNet、DenseNet的稠密聚合</li><li>\(y_l=F_l(\bigotimes(y_{l-c^0},y_{l-c^1},y_{l-c^2}…y_{l-c^k}))\)</li></ul></li></ul><hr><p><img src="SparseNet.png"></p><hr><ul><li>相关：<ul><li><a href="">PRN</a></li><li><a href="">CSPNet</a></li></ul></li></ul><hr>]]></content>
+        <content type="html"><![CDATA[<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><ul><li>论文：《<a href="https://openaccess.thecvf.com/content_ECCV_2018/papers/Ligeng_Zhu_Sparsely_Aggregated_Convolutional_ECCV_2018_paper.pdf">Sparsely Aggregated Convolutional Networks</a>》</li></ul><hr><ul><li>问题：<ul><li>ResNet型密集聚合（+）：聚合后的特征不可分解，深层特征稀释或破坏浅层特征</li><li>DenseNet型密集聚合（concat）：参数以\(O(N^2)\)增加，消耗大量参数和运算来处理同一块特征</li></ul></li></ul><hr><ul><li>方案：<ul><li>保留短梯度路径（skip connection）的优势，但避免类ResNet、DenseNet的稠密聚合</li><li>\(y_l=F_l(\bigotimes(y_{l-c^0},y_{l-c^1},y_{l-c^2}…y_{l-c^k}))\)</li></ul></li></ul><hr><p><img src="SparseNet.png"></p><hr><ul><li>相关：<ul><li><a href="http://qi-yao.xyz/2019/10/27/PartialResidualNetworks/">PRN</a></li><li><a href="">CSPNet</a></li></ul></li></ul><hr>]]></content>
       
       
       <categories>
