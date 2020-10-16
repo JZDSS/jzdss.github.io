@@ -47,36 +47,9 @@
             
             <tag> ICCV </tag>
             
-            <tag> Object Detection </tag>
-            
-            <tag> light-weight </tag>
-            
             <tag> upsample </tag>
             
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>DAFS</title>
-      <link href="2019/10/27/DAFS/"/>
-      <url>2019/10/27/DAFS/</url>
-      
-        <content type="html"><![CDATA[<ul><li>论文：《<a href="http://openaccess.thecvf.com/content_ICCV_2019/papers/Li_Dynamic_Anchor_Feature_Selection_for_Single-Shot_Object_Detection_ICCV_2019_paper.pdf">Dynamic Anchor Feature Selection for Single-Shot Object Detection</a>》</li></ul><hr><ul><li><p>问题</p><ul><li>RefineDet的ODM预测时规则卷积的感受野和refine过的anchor位置不匹配</li></ul></li></ul><hr><ul><li>方案<ul><li>提出Dynamic Anchor Feature Selection(DAFS)，根据refine后的anchor动态地选择特征</li><li>改进RefineDet的TCB模块，双向聚合特征谱</li></ul></li></ul><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> Paper </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> ICCV </tag>
+            <tag> light-weight </tag>
             
             <tag> Object Detection </tag>
             
@@ -116,6 +89,33 @@
     
     
     <entry>
+      <title>DAFS</title>
+      <link href="2019/10/27/DAFS/"/>
+      <url>2019/10/27/DAFS/</url>
+      
+        <content type="html"><![CDATA[<ul><li>论文：《<a href="http://openaccess.thecvf.com/content_ICCV_2019/papers/Li_Dynamic_Anchor_Feature_Selection_for_Single-Shot_Object_Detection_ICCV_2019_paper.pdf">Dynamic Anchor Feature Selection for Single-Shot Object Detection</a>》</li></ul><hr><ul><li><p>问题</p><ul><li>RefineDet的ODM预测时规则卷积的感受野和refine过的anchor位置不匹配</li></ul></li></ul><hr><ul><li>方案<ul><li>提出Dynamic Anchor Feature Selection(DAFS)，根据refine后的anchor动态地选择特征</li><li>改进RefineDet的TCB模块，双向聚合特征谱</li></ul></li></ul><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Paper </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ICCV </tag>
+            
+            <tag> Object Detection </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>LRFNet</title>
       <link href="2019/10/27/LRFNet/"/>
       <url>2019/10/27/LRFNet/</url>
@@ -137,6 +137,37 @@
             <tag> Object Detection </tag>
             
             <tag> scratch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PRN</title>
+      <link href="2019/10/27/PartialResidualNetworks/"/>
+      <url>2019/10/27/PartialResidualNetworks/</url>
+      
+        <content type="html"><![CDATA[<ul><li>论文：《<a href="https://openaccess.thecvf.com/content_ICCVW_2019/papers/LPCV/Wang_Enriching_Variety_of_Layer-Wise_Learning_Information_by_Gradient_Combination_ICCVW_2019_paper.pdf">Enriching Variety of Layer-wise Learning Information by Gradient Combination</a>》</li></ul><hr><ul><li><p>问题：</p><ul><li>之前的文献关注如何组合特征和如何使梯度得以传播，但是否可以通过得到更丰富的梯度组合来提高网络性能？</li></ul></li></ul><hr><ul><li><p>方案：</p><ul><li>部分通道求和<br><img src="PRN-shrink.png" alt="PRN-shrink"><br><img src="PRN-expand.png" alt="PRN-expand"><br><img src="PRN-bottleneck.png" alt="PRN-bottleneck"></li></ul></li></ul><hr><ul><li><p>优势：</p><ul><li>更丰富的梯度传播路径<br><img src="grad.png"></li><li>网络结构的灵活性</li><li>轻量</li></ul></li></ul><hr><ul><li><p>相关：</p><ul><li><a href="http://qi-yao.xyz/2018/09/08/SparseNet/">SparseNet</a></li><li><a href="">CSPNet</a></li></ul></li></ul><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Paper </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ICCV </tag>
+            
+            <tag> light-weight </tag>
+            
+            <tag> backbone </tag>
+            
+            <tag> gradient </tag>
             
         </tags>
       
@@ -192,9 +223,9 @@
             
             <tag> ICCV </tag>
             
-            <tag> Object Detection </tag>
-            
             <tag> light-weight </tag>
+            
+            <tag> Object Detection </tag>
             
             <tag> two-stage </tag>
             
@@ -285,13 +316,13 @@
       
         <tags>
             
-            <tag> fusion </tag>
-            
-            <tag> NeurIPS </tag>
-            
             <tag> Object Detection </tag>
             
             <tag> backbone </tag>
+            
+            <tag> NeurIPS </tag>
+            
+            <tag> fusion </tag>
             
         </tags>
       
@@ -318,13 +349,13 @@
             
             <tag> ECCV </tag>
             
-            <tag> loss </tag>
-            
             <tag> classification </tag>
             
             <tag> attribute </tag>
             
             <tag> attention </tag>
+            
+            <tag> loss </tag>
             
             <tag> Visual Cognition </tag>
             
@@ -351,9 +382,9 @@
       
         <tags>
             
-            <tag> ECCV </tag>
-            
             <tag> Object Detection </tag>
+            
+            <tag> ECCV </tag>
             
             <tag> backbone </tag>
             
@@ -380,9 +411,9 @@
       
         <tags>
             
-            <tag> ECCV </tag>
-            
             <tag> light-weight </tag>
+            
+            <tag> ECCV </tag>
             
             <tag> backbone </tag>
             
@@ -409,13 +440,13 @@
       
         <tags>
             
-            <tag> CVPR </tag>
-            
             <tag> Object Detection </tag>
             
-            <tag> two-stage </tag>
+            <tag> CVPR </tag>
             
             <tag> cascade </tag>
+            
+            <tag> two-stage </tag>
             
         </tags>
       
@@ -440,9 +471,9 @@
       
         <tags>
             
-            <tag> ECCV </tag>
-            
             <tag> Object Detection </tag>
+            
+            <tag> ECCV </tag>
             
         </tags>
       
