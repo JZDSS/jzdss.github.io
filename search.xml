@@ -329,6 +329,35 @@
     
     
     <entry>
+      <title>EfficientNet</title>
+      <link href="2019/06/10/EfficientNet/"/>
+      <url>2019/06/10/EfficientNet/</url>
+      
+        <content type="html"><![CDATA[<ul><li>论文：《<a href="https://arxiv.org/pdf/1905.11946.pdf">EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks</a>》</li></ul><hr><ul><li>贡献：<br>基于以下发现，探索最优的宽度、深度、分辨率配置<ul><li>增加宽度、深度、分辨率都能带来精度提升，但边际效益递减</li><li>同样FLOPS下，不同宽度、深度、分辨率配置的神经网络性能有差异</li></ul></li></ul><hr><p>相关：</p><ul><li><a href="http://qi-yao.xyz/2020/6/16/EfficientDet">EfficientDet</a></li></ul><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Paper </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> light-weight </tag>
+            
+            <tag> backbone </tag>
+            
+            <tag> ICML </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>FishNet</title>
       <link href="2018/12/02/FishNet/"/>
       <url>2018/12/02/FishNet/</url>
