@@ -83,6 +83,37 @@
     
     
     <entry>
+      <title>EfficientDet</title>
+      <link href="posts/a510d887.html"/>
+      <url>posts/a510d887.html</url>
+      
+        <content type="html"><![CDATA[<ul><li>论文：《<a href="https://openaccess.thecvf.com/content_CVPR_2020/papers/Tan_EfficientDet_Scalable_and_Efficient_Object_Detection_CVPR_2020_paper.pdf">EfficientDet: Scalable and Efficient Object Detection</a>》</li></ul><hr><p>贡献：</p><ul><li>提出高效的特征融合模块BiFPN<ul><li>去除了只有一个输入的节点</li><li>添加额外的连接</li><li>特征求和部分添加可学习的权重参数</li><li>BiFPN多次叠加构成Neck<br><img src="/posts/a510d887/EfficientDet.png" alt="EfficientDet"></li></ul></li><li>用EfficientNet的思路探索了合适的Neck、Head和输入分辨率配置</li></ul><hr><p>相关：</p><ul><li><a href="http://qi-yao.xyz/posts/a8875d51.html">EfficientNet</a></li></ul><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Paper </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> fusion </tag>
+            
+            <tag> CVPR </tag>
+            
+            <tag> Object Detection </tag>
+            
+            <tag> neck </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CARAFE</title>
       <link href="posts/ed54d5da.html"/>
       <url>posts/ed54d5da.html</url>
