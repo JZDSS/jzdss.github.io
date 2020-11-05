@@ -103,9 +103,9 @@
             
             <tag> CVPR </tag>
             
-            <tag> Object Detection </tag>
-            
             <tag> neck </tag>
+            
+            <tag> detection </tag>
             
         </tags>
       
@@ -130,13 +130,13 @@
       
         <tags>
             
-            <tag> Object Detection </tag>
-            
             <tag> light-weight </tag>
             
             <tag> ICCV </tag>
             
             <tag> upsample </tag>
+            
+            <tag> detection </tag>
             
         </tags>
       
@@ -161,11 +161,11 @@
       
         <tags>
             
-            <tag> Object Detection </tag>
-            
             <tag> ICCV </tag>
             
             <tag> aerial </tag>
+            
+            <tag> detection </tag>
             
         </tags>
       
@@ -190,9 +190,9 @@
       
         <tags>
             
-            <tag> Object Detection </tag>
-            
             <tag> ICCV </tag>
+            
+            <tag> detection </tag>
             
         </tags>
       
@@ -217,11 +217,11 @@
       
         <tags>
             
-            <tag> Object Detection </tag>
-            
             <tag> ICCV </tag>
             
             <tag> scratch </tag>
+            
+            <tag> detection </tag>
             
         </tags>
       
@@ -306,8 +306,6 @@
       
         <tags>
             
-            <tag> Object Detection </tag>
-            
             <tag> light-weight </tag>
             
             <tag> two-stage </tag>
@@ -317,6 +315,8 @@
             <tag> backbone </tag>
             
             <tag> attention </tag>
+            
+            <tag> detection </tag>
             
         </tags>
       
@@ -341,11 +341,11 @@
       
         <tags>
             
-            <tag> Object Detection </tag>
-            
             <tag> ICCV </tag>
             
             <tag> scale </tag>
+            
+            <tag> detection </tag>
             
         </tags>
       
@@ -434,9 +434,9 @@
             
             <tag> NeurIPS </tag>
             
-            <tag> Object Detection </tag>
-            
             <tag> backbone </tag>
+            
+            <tag> detection </tag>
             
         </tags>
       
@@ -496,11 +496,11 @@
       
         <tags>
             
-            <tag> Object Detection </tag>
-            
             <tag> backbone </tag>
             
             <tag> ECCV </tag>
+            
+            <tag> detection </tag>
             
         </tags>
       
@@ -556,11 +556,11 @@
             
             <tag> CVPR </tag>
             
-            <tag> Object Detection </tag>
-            
             <tag> two-stage </tag>
             
             <tag> cascade </tag>
+            
+            <tag> detection </tag>
             
         </tags>
       
@@ -585,9 +585,9 @@
       
         <tags>
             
-            <tag> Object Detection </tag>
-            
             <tag> ECCV </tag>
+            
+            <tag> detection </tag>
             
         </tags>
       
