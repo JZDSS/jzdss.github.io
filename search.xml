@@ -103,9 +103,9 @@
             
             <tag> CVPR </tag>
             
-            <tag> neck </tag>
-            
             <tag> detection </tag>
+            
+            <tag> neck </tag>
             
         </tags>
       
@@ -130,13 +130,13 @@
       
         <tags>
             
+            <tag> detection </tag>
+            
             <tag> light-weight </tag>
             
             <tag> ICCV </tag>
             
             <tag> upsample </tag>
-            
-            <tag> detection </tag>
             
         </tags>
       
@@ -161,11 +161,11 @@
       
         <tags>
             
+            <tag> detection </tag>
+            
             <tag> ICCV </tag>
             
             <tag> aerial </tag>
-            
-            <tag> detection </tag>
             
         </tags>
       
@@ -190,9 +190,9 @@
       
         <tags>
             
-            <tag> ICCV </tag>
-            
             <tag> detection </tag>
+            
+            <tag> ICCV </tag>
             
         </tags>
       
@@ -217,11 +217,11 @@
       
         <tags>
             
+            <tag> detection </tag>
+            
             <tag> ICCV </tag>
             
             <tag> scratch </tag>
-            
-            <tag> detection </tag>
             
         </tags>
       
@@ -234,7 +234,7 @@
       <link href="posts/8a14a4e3.html"/>
       <url>posts/8a14a4e3.html</url>
       
-        <content type="html"><![CDATA[<h3 id="《Enriching-Variety-of-Layer-wise-Learning-Information-by-Gradient-Combination》"><a href="#《Enriching-Variety-of-Layer-wise-Learning-Information-by-Gradient-Combination》" class="headerlink" title="《Enriching Variety of Layer-wise Learning Information by Gradient Combination》"></a>《<a href="https://openaccess.thecvf.com/content_ICCVW_2019/papers/LPCV/Wang_Enriching_Variety_of_Layer-Wise_Learning_Information_by_Gradient_Combination_ICCVW_2019_paper.pdf">Enriching Variety of Layer-wise Learning Information by Gradient Combination</a>》</h3><a id="more"></a><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul><li>之前的文献关注如何组合特征和如何使梯度得以传播，但是否可以通过得到更丰富的梯度组合来提高网络性能？</li></ul><h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><ul><li>部分通道求和<br><img src="/posts/8a14a4e3/PRN-shrink.png" alt="PRN-shrink"><br><img src="/posts/8a14a4e3/PRN-expand.png" alt="PRN-expand"><br><img src="/posts/8a14a4e3/PRN-bottleneck.png" alt="PRN-bottleneck"></li></ul><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul><li>更丰富的梯度传播路径<br><img src="/posts/8a14a4e3/grad.png"></li><li>网络结构的灵活性</li><li>轻量</li></ul><h3 id="相关"><a href="#相关" class="headerlink" title="相关"></a>相关</h3><ul><li><a href="http://qi-yao.xyz/posts/edc10435.html">SparseNet</a></li><li><a href="http://qi-yao.xyz/posts/b956e9d5.html">CSPNet</a></li></ul><hr>]]></content>
+        <content type="html"><![CDATA[<h3 id="《Enriching-Variety-of-Layer-wise-Learning-Information-by-Gradient-Combination》"><a href="#《Enriching-Variety-of-Layer-wise-Learning-Information-by-Gradient-Combination》" class="headerlink" title="《Enriching Variety of Layer-wise Learning Information by Gradient Combination》"></a>《<a href="https://openaccess.thecvf.com/content_ICCVW_2019/papers/LPCV/Wang_Enriching_Variety_of_Layer-Wise_Learning_Information_by_Gradient_Combination_ICCVW_2019_paper.pdf">Enriching Variety of Layer-wise Learning Information by Gradient Combination</a>》</h3><a id="more"></a><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul><li>之前的文献关注如何组合特征和如何使梯度得以传播，但是否可以通过得到更丰富的梯度组合来提高网络性能？</li></ul><h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><ul><li>部分通道求和（下图中的特征谱按对应颜色的箭头进行正向传播）<br><img src="/posts/8a14a4e3/PRN-shrink.png" alt="PRN-shrink"><br><img src="/posts/8a14a4e3/PRN-expand.png" alt="PRN-expand"><br><img src="/posts/8a14a4e3/PRN-bottleneck.png" alt="PRN-bottleneck"></li></ul><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul><li>更丰富的梯度传播路径<br><img src="/posts/8a14a4e3/grad.png"></li><li>网络结构的灵活性</li><li>轻量</li></ul><h3 id="相关"><a href="#相关" class="headerlink" title="相关"></a>相关</h3><ul><li><a href="http://qi-yao.xyz/posts/edc10435.html">SparseNet</a></li><li><a href="http://qi-yao.xyz/posts/b956e9d5.html">CSPNet</a></li></ul><hr>]]></content>
       
       
       <categories>
@@ -306,6 +306,8 @@
       
         <tags>
             
+            <tag> detection </tag>
+            
             <tag> light-weight </tag>
             
             <tag> two-stage </tag>
@@ -315,8 +317,6 @@
             <tag> backbone </tag>
             
             <tag> attention </tag>
-            
-            <tag> detection </tag>
             
         </tags>
       
@@ -341,11 +341,11 @@
       
         <tags>
             
+            <tag> detection </tag>
+            
             <tag> ICCV </tag>
             
             <tag> scale </tag>
-            
-            <tag> detection </tag>
             
         </tags>
       
@@ -434,9 +434,9 @@
             
             <tag> NeurIPS </tag>
             
-            <tag> backbone </tag>
-            
             <tag> detection </tag>
+            
+            <tag> backbone </tag>
             
         </tags>
       
@@ -496,11 +496,11 @@
       
         <tags>
             
+            <tag> detection </tag>
+            
             <tag> backbone </tag>
             
             <tag> ECCV </tag>
-            
-            <tag> detection </tag>
             
         </tags>
       
@@ -556,11 +556,11 @@
             
             <tag> CVPR </tag>
             
+            <tag> detection </tag>
+            
             <tag> two-stage </tag>
             
             <tag> cascade </tag>
-            
-            <tag> detection </tag>
             
         </tags>
       
@@ -585,9 +585,9 @@
       
         <tags>
             
-            <tag> ECCV </tag>
-            
             <tag> detection </tag>
+            
+            <tag> ECCV </tag>
             
         </tags>
       
