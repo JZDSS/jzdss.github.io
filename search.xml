@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>多卡训练时非tensor输入</title>
+      <link href="posts/5a33d4b6.html"/>
+      <url>posts/5a33d4b6.html</url>
+      
+        <content type="html"><![CDATA[<a id="more"></a><p>　　DataParallel类的forward中通过scatter方法把输入分配到各显卡，并行计算后通过gather方法进行整合。scatter只实现了对torch.Tensor的按batch维度切分，tuple、list、dict等类则进行递归，其他类型保持不变。<br>　　list：[Tensor1, Tensor2]作为输入，2卡训练，scatter将Tensor1和Tensor2分别切分成2个：Tensor1_a、Tensor1_b、Tensor2_a、Tensor2_b，并把[Tensor1_a, Tensor2_a]作为GPU1的输入，[Tensor1_b, Tensor2_b]作为GPU2的输入。<br>　　list：[ndarray1, ndarray2]作为输入，2卡训练时，由于该list内的元素都不是Tensor，因此GPU1和GPU2都接受完整的[ndarray1, ndarray2]作为输入。<br>　　Pytorch 1.7的scatter的具体实现如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scatter</span>(<span class="params">inputs, target_gpus, dim=<span class="number">0</span></span>):</span></span><br><span class="line">    <span class="string">r&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Slices tensors into approximately equal chunks and</span></span><br><span class="line"><span class="string">    distributes them across given GPUs. Duplicates</span></span><br><span class="line"><span class="string">    references to objects that are not tensors.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">scatter_map</span>(<span class="params">obj</span>):</span></span><br><span class="line">        <span class="keyword">if</span> isinstance(obj, torch.Tensor):</span><br><span class="line">            <span class="keyword">return</span> Scatter.apply(target_gpus, <span class="literal">None</span>, dim, obj)</span><br><span class="line">        <span class="keyword">if</span> isinstance(obj, tuple) <span class="keyword">and</span> len(obj) &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> list(zip(*map(scatter_map, obj)))</span><br><span class="line">        <span class="keyword">if</span> isinstance(obj, list) <span class="keyword">and</span> len(obj) &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> list(map(list, zip(*map(scatter_map, obj))))</span><br><span class="line">        <span class="keyword">if</span> isinstance(obj, dict) <span class="keyword">and</span> len(obj) &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> list(map(type(obj), zip(*map(scatter_map, obj.items()))))</span><br><span class="line">        <span class="keyword">return</span> [obj <span class="keyword">for</span> targets <span class="keyword">in</span> target_gpus]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># After scatter_map is called, a scatter_map cell will exist. This cell</span></span><br><span class="line">    <span class="comment"># has a reference to the actual function scatter_map, which has references</span></span><br><span class="line">    <span class="comment"># to a closure that has a reference to the scatter_map cell (because the</span></span><br><span class="line">    <span class="comment"># fn is recursive). To avoid this reference cycle, we set the function to</span></span><br><span class="line">    <span class="comment"># None, clearing the cell</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        res = scatter_map(inputs)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        scatter_map = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure><p>　　某些情况下可能需要以长度为batchsize的list作为输入。以2卡为例，希望把list的前半分配给GPU1，后半分配给GPU2，这是无法用DataParalle来实现的。采取策略为：list内的元素不用Tensor，可以用np.ndarray或其他类型，这样每张卡上的模型都会接受到完整的list。另外设置一个torch.Tensor类的index变量作为输入，scatter会将index切分成两份。在模型的forward中利用index来获取对应的list切片。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Model</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>():</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">x, index</span>):</span></span><br><span class="line">        x = x[int(index[<span class="number">0</span>]) : int(index[<span class="number">-1</span>]) + <span class="number">1</span>]</span><br><span class="line">        x = [torch.from_numpy(i).to(index.device) <span class="keyword">for</span> i <span class="keyword">in</span> inputs]</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">model = nn.DataParalle(Model())</span><br><span class="line">index = torch.tensor(list(range(batch_size))).to(device)</span><br><span class="line">x = [ndarray1, ndarray2, ..., ndarray16]</span><br><span class="line">out = model(x, index)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 代码块 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Pytorch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>DataLoader无限循环</title>
+      <link href="posts/52f897dd.html"/>
+      <url>posts/52f897dd.html</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">inf_gen</span>(<span class="params">dataloader</span>):</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> dataloader:</span><br><span class="line">            <span class="keyword">yield</span> item</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 代码块 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Pytorch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Softmax和Cross-entropy的数值稳定问题</title>
       <link href="posts/6deaeeb1.html"/>
       <url>posts/6deaeeb1.html</url>
@@ -33,7 +83,7 @@
       <link href="posts/1b0927de.html"/>
       <url>posts/1b0927de.html</url>
       
-        <content type="html"><![CDATA[<h3 id="基础功能"><a href="#基础功能" class="headerlink" title="基础功能"></a>基础功能</h3>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https:&#x2F;&#x2F;registry.npm.taobao.org</span><br><span class="line">npm install hexo-cli -g</span><br><span class="line">npm install hexo-server --save</span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;tufu9441&#x2F;maupassant-hexo.git themes&#x2F;maupassant</span><br><span class="line">npm install hexo-renderer-pug --save</span><br><span class="line">npm install hexo-renderer-sass --save</span><br></pre></td></tr></table></figure><h3 id="页面显示"><a href="#页面显示" class="headerlink" title="页面显示"></a>页面显示</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-archive --save</span><br><span class="line">npm install hexo-generator-category --save</span><br><span class="line">npm install hexo-generator-tag --save</span><br><span class="line">npm install hexo-generator-search --save</span><br><span class="line"># npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure><h3 id="唯一链接"><a href="#唯一链接" class="headerlink" title="唯一链接"></a>唯一链接</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br><span class="line">npm install https:&#x2F;&#x2F;github.com&#x2F;foreveryang321&#x2F;hexo-asset-image.git --save</span><br></pre></td></tr></table></figure><h3 id="备忘"><a href="#备忘" class="headerlink" title="备忘"></a>备忘</h3><ul><li>兼容<a href="https://github.com/Rozbo/hexo-abbrlink">hexo-abbrlink</a>的<a href="https://github.com/foreveryang321/hexo-asset-image">hexo-asset-image</a></li></ul><hr>]]></content>
+        <content type="html"><![CDATA[<h3 id="基础功能"><a href="#基础功能" class="headerlink" title="基础功能"></a>基础功能</h3>  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br><span class="line">npm install hexo-cli -g</span><br><span class="line">npm install hexo-server --save</span><br><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure><h3 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h3>  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/tufu9441/maupassant-hexo.git themes/maupassant</span><br><span class="line">npm install hexo-renderer-pug --save</span><br><span class="line">npm install hexo-renderer-sass --save</span><br></pre></td></tr></table></figure><h3 id="页面显示"><a href="#页面显示" class="headerlink" title="页面显示"></a>页面显示</h3>  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-archive --save</span><br><span class="line">npm install hexo-generator-category --save</span><br><span class="line">npm install hexo-generator-tag --save</span><br><span class="line">npm install hexo-generator-search --save</span><br><span class="line"><span class="comment"># npm install hexo-asset-image --save</span></span><br></pre></td></tr></table></figure><h3 id="唯一链接"><a href="#唯一链接" class="headerlink" title="唯一链接"></a>唯一链接</h3>  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-abbrlink --save</span><br><span class="line">npm install https://github.com/foreveryang321/hexo-asset-image.git --save</span><br></pre></td></tr></table></figure><h3 id="备忘"><a href="#备忘" class="headerlink" title="备忘"></a>备忘</h3><ul><li>兼容<a href="https://github.com/Rozbo/hexo-abbrlink">hexo-abbrlink</a>的<a href="https://github.com/foreveryang321/hexo-asset-image">hexo-asset-image</a></li></ul><hr>]]></content>
       
       
       <categories>
@@ -230,37 +280,6 @@
     
     
     <entry>
-      <title>PRN</title>
-      <link href="posts/8a14a4e3.html"/>
-      <url>posts/8a14a4e3.html</url>
-      
-        <content type="html"><![CDATA[<h3 id="《Enriching-Variety-of-Layer-wise-Learning-Information-by-Gradient-Combination》"><a href="#《Enriching-Variety-of-Layer-wise-Learning-Information-by-Gradient-Combination》" class="headerlink" title="《Enriching Variety of Layer-wise Learning Information by Gradient Combination》"></a>《<a href="https://openaccess.thecvf.com/content_ICCVW_2019/papers/LPCV/Wang_Enriching_Variety_of_Layer-Wise_Learning_Information_by_Gradient_Combination_ICCVW_2019_paper.pdf">Enriching Variety of Layer-wise Learning Information by Gradient Combination</a>》</h3><a id="more"></a><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul><li>之前的文献关注如何组合特征和如何使梯度得以传播，但是否可以通过得到更丰富的梯度组合来提高网络性能？</li></ul><h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><ul><li>部分通道求和（下图中的特征谱按对应颜色的箭头进行正向传播）<br><img src="/posts/8a14a4e3/PRN-shrink.png" alt="PRN-shrink"><br><img src="/posts/8a14a4e3/PRN-expand.png" alt="PRN-expand"><br><img src="/posts/8a14a4e3/PRN-bottleneck.png" alt="PRN-bottleneck"></li></ul><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul><li>更丰富的梯度传播路径<br><img src="/posts/8a14a4e3/grad.png"></li><li>网络结构的灵活性</li><li>轻量</li></ul><h3 id="相关"><a href="#相关" class="headerlink" title="相关"></a>相关</h3><ul><li><a href="http://qi-yao.xyz/posts/edc10435.html">SparseNet</a></li><li><a href="http://qi-yao.xyz/posts/b956e9d5.html">CSPNet</a></li></ul><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> Paper </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> light-weight </tag>
-            
-            <tag> ICCV </tag>
-            
-            <tag> backbone </tag>
-            
-            <tag> gradient </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>RPNN</title>
       <link href="posts/d3623899.html"/>
       <url>posts/d3623899.html</url>
@@ -325,35 +344,6 @@
     
     
     <entry>
-      <title>TridentNet</title>
-      <link href="posts/92fd9c72.html"/>
-      <url>posts/92fd9c72.html</url>
-      
-        <content type="html"><![CDATA[<h3 id="《Scale-Aware-Trident-Networks-for-Object-Detection》"><a href="#《Scale-Aware-Trident-Networks-for-Object-Detection》" class="headerlink" title="《Scale-Aware Trident Networks for Object Detection》"></a>《<a href="http://openaccess.thecvf.com/content_ICCV_2019/papers/Li_Scale-Aware_Trident_Networks_for_Object_Detection_ICCV_2019_paper.pdf">Scale-Aware Trident Networks for Object Detection</a>》</h3><a id="more"></a><h3 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h3><ul><li><p>通过对backbone网络的部分层设置不同的扩张率，探索了感受野对目标检测效果的影响</p><ul><li><p>感受野需要和目标尺度相匹配</p></li><li><p>有效感受野小于理论感受野</p></li><li><p>感受野需要在大目标和小目标之间找到平衡</p></li></ul></li><li><p>权重共享，扩张率不同的多条分支生成不同感受野的特征以应对不同尺度的目标</p><p><img src="/posts/92fd9c72/TridentNet.png"></p></li><li><p>类似SNIP，采用scale-aware的训练方法</p></li><li><p>可以使用主分支检测达到近似三分支的精度(扩展尺度范围为0到∞相当于放弃了scale-aware训练策略？)</p></li></ul><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> Paper </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> detection </tag>
-            
-            <tag> ICCV </tag>
-            
-            <tag> scale </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>VrR-VG</title>
       <link href="posts/bdcfc59d.html"/>
       <url>posts/bdcfc59d.html</url>
@@ -377,6 +367,66 @@
             <tag> relationship </tag>
             
             <tag> dataset </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>PRN</title>
+      <link href="posts/8a14a4e3.html"/>
+      <url>posts/8a14a4e3.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="《Enriching-Variety-of-Layer-wise-Learning-Information-by-Gradient-Combination》"><a href="#《Enriching-Variety-of-Layer-wise-Learning-Information-by-Gradient-Combination》" class="headerlink" title="《Enriching Variety of Layer-wise Learning Information by Gradient Combination》"></a>《<a href="https://openaccess.thecvf.com/content_ICCVW_2019/papers/LPCV/Wang_Enriching_Variety_of_Layer-Wise_Learning_Information_by_Gradient_Combination_ICCVW_2019_paper.pdf">Enriching Variety of Layer-wise Learning Information by Gradient Combination</a>》</h3><a id="more"></a><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ul><li>之前的文献关注如何组合特征和如何使梯度得以传播，但是否可以通过得到更丰富的梯度组合来提高网络性能？</li></ul><h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><ul><li>部分通道求和（下图中的特征谱按对应颜色的箭头进行正向传播）<br><img src="/posts/8a14a4e3/PRN-shrink.png" alt="PRN-shrink"><br><img src="/posts/8a14a4e3/PRN-expand.png" alt="PRN-expand"><br><img src="/posts/8a14a4e3/PRN-bottleneck.png" alt="PRN-bottleneck"></li></ul><h3 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h3><ul><li>更丰富的梯度传播路径<br><img src="/posts/8a14a4e3/grad.png"></li><li>网络结构的灵活性</li><li>轻量</li></ul><h3 id="相关"><a href="#相关" class="headerlink" title="相关"></a>相关</h3><ul><li><a href="http://qi-yao.xyz/posts/edc10435.html">SparseNet</a></li><li><a href="http://qi-yao.xyz/posts/b956e9d5.html">CSPNet</a></li></ul><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Paper </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> light-weight </tag>
+            
+            <tag> ICCV </tag>
+            
+            <tag> backbone </tag>
+            
+            <tag> gradient </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>TridentNet</title>
+      <link href="posts/92fd9c72.html"/>
+      <url>posts/92fd9c72.html</url>
+      
+        <content type="html"><![CDATA[<h3 id="《Scale-Aware-Trident-Networks-for-Object-Detection》"><a href="#《Scale-Aware-Trident-Networks-for-Object-Detection》" class="headerlink" title="《Scale-Aware Trident Networks for Object Detection》"></a>《<a href="http://openaccess.thecvf.com/content_ICCV_2019/papers/Li_Scale-Aware_Trident_Networks_for_Object_Detection_ICCV_2019_paper.pdf">Scale-Aware Trident Networks for Object Detection</a>》</h3><a id="more"></a><h3 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h3><ul><li><p>通过对backbone网络的部分层设置不同的扩张率，探索了感受野对目标检测效果的影响</p><ul><li><p>感受野需要和目标尺度相匹配</p></li><li><p>有效感受野小于理论感受野</p></li><li><p>感受野需要在大目标和小目标之间找到平衡</p></li></ul></li><li><p>权重共享，扩张率不同的多条分支生成不同感受野的特征以应对不同尺度的目标</p><p><img src="/posts/92fd9c72/TridentNet.png"></p></li><li><p>类似SNIP，采用scale-aware的训练方法</p></li><li><p>可以使用主分支检测达到近似三分支的精度(扩展尺度范围为0到∞相当于放弃了scale-aware训练策略？)</p></li></ul><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> Paper </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> detection </tag>
+            
+            <tag> ICCV </tag>
+            
+            <tag> scale </tag>
             
         </tags>
       
